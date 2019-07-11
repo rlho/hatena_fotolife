@@ -1,6 +1,4 @@
 require "hatena_fotolife/version"
-
-module HatenaFotolife
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require "hatena_fotolife/client"
+require "hatena_fotolife/configuration"
+require "hatena_fotolife/image"
