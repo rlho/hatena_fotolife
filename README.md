@@ -22,9 +22,7 @@ Or install it yourself as:
 
 ## Get OAuth credentials
 You need to set up OAuth 1.0a keys and tokens before using this gem.
-[this page](http://developer.hatena.ne.jp/ja/documents/auth/apis/oauth), 
-
-https://github.com/kymmt90/hatenablog#get-oauth-credentials
+Reference: [Hatena Developer Center OAuth](http://developer.hatena.ne.jp/ja/documents/auth/apis/oauth), 
 
 ## Usage
 
