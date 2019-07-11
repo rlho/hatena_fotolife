@@ -29,7 +29,7 @@ https://github.com/kymmt90/hatenablog#get-oauth-credentials
 ## Usage
 
 ```ruby
-require 'hatenafotolife'
+require 'hatena_fotolife'
 
 # Read the configuration from 'config.yml'
 HatenaFotolife::Client.create.post_image(file_path: your_image_path)
