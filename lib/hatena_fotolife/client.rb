@@ -35,7 +35,7 @@ module HatenaFotolife
     def post_image(title: nil, file_path:, subject: nil)
       title = File.basename(file_path, '.*') unless title
       content = Base64.encode64(open(file_path).read)
-      entry_xml = image_xml(title: title, content: content, subject: subject)
+      entry_xml = image_xml(title: title, content: content)
       response = post(entry_xml)
       Image.load_xml(response.body)
     end
@@ -45,11 +45,10 @@ module HatenaFotolife
     # @param [String] subject folder name
     # @param [String] content entry content
     # @return [String] XML string
-    def image_xml(title:, subject: nil, content:)
+    def image_xml(title:, content:)
       builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
-        xml.entry('xmlns'     => 'http://purl.org/atom/ns') do
+        xml.entry('xmlns' => 'http://purl.org/atom/ns') do
           xml.title title
-          # TODO: 拡張子によって変えたい
           xml.content(content, type: 'image/jpeg', mode: 'base64')
         end
       end
