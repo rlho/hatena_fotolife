@@ -20,12 +20,30 @@ Or install it yourself as:
 
     $ gem install hatena_fotolife
 
-## Get OAuth credentials
-You need to set up OAuth 1.0a keys and tokens before using this gem.
-Reference: [Hatena Developer Center OAuth](http://developer.hatena.ne.jp/ja/documents/auth/apis/oauth), 
+## OAuth credentials
+Hatena Fotolife API requires user authentication with OAuth.
+So you need to get OAuth 1.0a keys and consumer tokens before using this gem.
+
+### 1. Get consumer_key & consumer_secret 
+Get consumer_key and consumer_secret from [Hatena Developer Center](https://www.hatena.ne.jp/rlho/config/auth/develop)
+
+### 2. Get access_token & access_token_secret
+
+```
+% bundle exec get_access_token <consumer_key> <consumer_secret>
+```
 
 ## Usage
+1. Create config.yml file
 
+```yaml
+consumer_key: <Hatena application consumer key>
+consumer_secret: <Hatena application consumer secret>
+access_token: <Hatena application access token>
+access_token_secret: <Hatena application access token secret>
+```
+
+2. Run
 ```ruby
 require 'hatena_fotolife'
 
