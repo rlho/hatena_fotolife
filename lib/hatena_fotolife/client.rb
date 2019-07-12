@@ -37,7 +37,8 @@ module HatenaFotolife
       content = Base64.encode64(open(file_path).read)
       entry_xml = image_xml(title: title, content: content)
       response = post(entry_xml)
-      Image.load_xml(response.body)
+      image = Image.load_xml(response.body)
+      puts "Image url: #{image.image_uri}"
     end
 
     # Build a entry XML from arguments.

@@ -4,7 +4,7 @@ require 'time'
 module HatenaFotolife
   class Image
 
-    attr_accessor :title, :subject, :content
+    attr_reader :title, :uri, :image_uri, :id, :image_uri_small, :image_uri_medium
 
     # Create a new image from a XML string.
     # @param [String] xml XML string representation
@@ -31,6 +31,9 @@ module HatenaFotolife
       @title                     = @document.at_css('title').content
       @uri                       = @document.at_css('link[@rel="alternate"]')['href'].to_s
       @issued                    = @document.at_css('issued').content
+      @image_uri                 = @document.xpath('//hatena:imageurl/text()').to_s
+      @image_uri_small           = @document.xpath('//hatena:imageurlsmall/text()').to_s
+      @image_uri_medium          = @document.xpath('//hatena:imageurlmedium/text()').to_s
       @author_name               = @document.at_css('author name').content
     end
   end
