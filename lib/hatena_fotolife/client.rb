@@ -39,6 +39,7 @@ module HatenaFotolife
       response = post(entry_xml)
       image = Image.load_xml(response.body)
       puts "Image url: #{image.image_uri}"
+      image.image_uri
     end
 
     # Build a entry XML from arguments.
