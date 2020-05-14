@@ -6,7 +6,7 @@ module HatenaFotolife
   class Client
     DEFAULT_CONFIG_PATH = './config.yml'
     FOTOLIFE_URI = 'http://f.hatena.ne.jp'
-    POST_IMAGE_URI = 'http://f.hatena.ne.jp/atom/post'
+    POST_IMAGE_URI = 'https://f.hatena.ne.jp/atom/post'
 
     attr_writer :requester
 
