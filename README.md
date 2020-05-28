@@ -24,7 +24,7 @@ Or install it yourself as:
 Hatena Fotolife API requires user authentication with OAuth.
 So you need to get OAuth 1.0a keys and consumer tokens before using this gem.
 
-### 1. Get consumer_key & consumer_secret 
+### 1. Get consumer_key & consumer_secret
 Get consumer_key and consumer_secret from [Hatena Developer Center](https://www.hatena.ne.jp/rlho/config/auth/develop)
 
 ### 2. Get access_token & access_token_secret
@@ -41,6 +41,9 @@ consumer_key: <Hatena application consumer key>
 consumer_secret: <Hatena application consumer secret>
 access_token: <Hatena application access token>
 access_token_secret: <Hatena application access token secret>
+consumer_options:
+  timeout: 300
+  open_timeout: 60
 ```
 
 2. Run
