@@ -9,7 +9,7 @@ module HatenaFotolife
     class RequestError < StandardError; end
 
     def self.create(config)
-      consumer = ::OAuth::Consumer.new(config.consumer_key, config.consumer_secret)
+      consumer = ::OAuth::Consumer.new(config.consumer_key, config.consumer_secret, config.consumer_options || {})
       Requester::OAuth.new(::OAuth::AccessToken.new(consumer, config.access_token, config.access_token_secret))
     end
 
