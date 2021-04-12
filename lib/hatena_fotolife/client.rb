@@ -31,7 +31,7 @@ module HatenaFotolife
     # Post a image.
     # @param [String] title entry title
     # @param [String] content entry content
-    # @return [HatenaImage::Image] posted image
+    # @return [String] URI of posted image
     def post_image(title: nil, file_path:, subject: nil)
       title = File.basename(file_path, '.*') unless title
       content = Base64.encode64(open(file_path).read)
