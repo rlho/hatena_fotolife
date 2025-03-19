@@ -33,9 +33,9 @@ module HatenaFotolife
       mime_type = case ext
                   when '.png' then 'image/png'
                   when '.gif' then 'image/gif'
-                  when '.svg' then 'image/svg+xml'
-                  when '.ico' then 'image/x-icon'
-                  else 'image/jpeg'
+                  when '.jpg','.jpeg' then 'image/jpeg'
+                  else
+                    raise "Unsupported file extension: #{ext}"
                   end
       return mime_type
     end
@@ -45,14 +45,18 @@ module HatenaFotolife
     # @param [String] content entry content
     # @return [HatenaImage::Image] posted image
     def post_image(title: nil, file_path:, subject: nil)
-      title = File.basename(file_path, '.*') unless title
-      content = Base64.encode64(open(file_path).read)
-      mime_type = file_path_to_mime_type(file_path: file_path)
-      entry_xml = image_xml(title: title, content: content, subject: subject, mime_type: mime_type)
-      response = post(entry_xml)
-      image = Image.load_xml(response.body)
-      puts "Image url: #{image.image_uri}"
-      image.image_uri
+      begin
+        title = File.basename(file_path, '.*') unless title
+        content = Base64.encode64(open(file_path).read)
+        mime_type = file_path_to_mime_type(file_path: file_path)
+        entry_xml = image_xml(title: title, content: content, subject: subject, mime_type: mime_type)
+        response = post(entry_xml)
+        image = Image.load_xml(response.body)
+        puts "Image url: #{image.image_uri}"
+        image.image_uri
+      rescue StandardError => e
+        puts "Error: #{e.message}"
+      end
     end
 
     # Build a entry XML from arguments.
