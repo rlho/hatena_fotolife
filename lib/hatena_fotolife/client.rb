@@ -34,7 +34,7 @@ module HatenaFotolife
     # @return [HatenaImage::Image] posted image
     def post_image(title: nil, file_path:, subject: nil)
       title = File.basename(file_path, '.*') unless title
-      content = Base64.encode64(open(file_path).read)
+      content = Base64.encode64(File.open(file_path, 'rb').read)
       entry_xml = image_xml(title: title, content: content, subject:subject)
       response = post(entry_xml)
       image = Image.load_xml(response.body)
