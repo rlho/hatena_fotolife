@@ -47,7 +47,7 @@ module HatenaFotolife
     def post_image(title: nil, file_path:, subject: nil)
       begin
         title = File.basename(file_path, '.*') unless title
-        content = Base64.encode64(open(file_path).read)
+        content = Base64.encode64(File.open(file_path, 'rb').read)
         mime_type = file_path_to_mime_type(file_path: file_path)
         entry_xml = image_xml(title: title, content: content, subject: subject, mime_type: mime_type)
         response = post(entry_xml)
