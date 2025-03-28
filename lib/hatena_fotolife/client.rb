@@ -28,18 +28,35 @@ module HatenaFotolife
       @requester = Requester.create(config)
     end
 
+    def file_path_to_mime_type(file_path:)
+      ext = File.extname(file_path).downcase
+      mime_type = case ext
+                  when '.png' then 'image/png'
+                  when '.gif' then 'image/gif'
+                  when '.jpg','.jpeg' then 'image/jpeg'
+                  else
+                    raise "Unsupported file extension: #{ext}"
+                  end
+      return mime_type
+    end
+
     # Post a image.
     # @param [String] title entry title
     # @param [String] content entry content
-    # @return [HatenaImage::Image] posted image
+    # @return [String] URI of posted image
     def post_image(title: nil, file_path:, subject: nil)
-      title = File.basename(file_path, '.*') unless title
-      content = Base64.encode64(File.open(file_path, 'rb').read)
-      entry_xml = image_xml(title: title, content: content, subject:subject)
-      response = post(entry_xml)
-      image = Image.load_xml(response.body)
-      puts "Image url: #{image.image_uri}"
-      image.image_uri
+      begin
+        title = File.basename(file_path, '.*') unless title
+        content = Base64.encode64(File.open(file_path, 'rb').read)
+        mime_type = file_path_to_mime_type(file_path: file_path)
+        entry_xml = image_xml(title: title, content: content, subject: subject, mime_type: mime_type)
+        response = post(entry_xml)
+        image = Image.load_xml(response.body)
+        puts "Image url: #{image.image_uri}"
+        image.image_uri
+      rescue StandardError => e
+        puts "Error: #{e.message}"
+      end
     end
 
     # Build a entry XML from arguments.
@@ -47,11 +64,11 @@ module HatenaFotolife
     # @param [String] subject folder name
     # @param [String] content entry content
     # @return [String] XML string
-    def image_xml(title:, content:, subject:)
+    def image_xml(title:, content:, subject:, mime_type:)
       builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
         xml.entry('xmlns' => 'http://purl.org/atom/ns') do
           xml.title title
-          xml.content(content, type: 'image/jpeg', mode: 'base64')
+          xml.content(content, type: mime_type, mode: 'base64')
           if subject
             xml.doc.root.add_namespace_definition('dc', 'http://purl.org/dc/elements/1.1/')
             xml['dc'].subject(subject)
