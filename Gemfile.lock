@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hatena_fotolife (0.1.4)
+    hatena_fotolife (0.1.5.1)
       hatenablog
       nokogiri
       oauth

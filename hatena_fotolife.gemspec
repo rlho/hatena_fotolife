@@ -22,13 +22,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "nokogiri", "~> 1.15"
-  spec.add_dependency "oauth", "~> 2.0"
-  spec.add_dependency "hatenablog", "~> 0.1.0"
+  spec.add_dependency "nokogiri"
+  spec.add_dependency "oauth", "~> 1.1"
+  spec.add_dependency "hatenablog"
 
-  spec.add_development_dependency "bundler", "~> 2.4"
+  spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.12"
-  spec.add_development_dependency "pry", "~> 0.14.2"
-  spec.add_development_dependency "yard", "~> 0.9.34"
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "yard"
 end
