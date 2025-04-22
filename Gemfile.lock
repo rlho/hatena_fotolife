@@ -4,7 +4,7 @@ PATH
     hatena_fotolife (0.1.5.1)
       hatenablog
       nokogiri
-      oauth
+      oauth (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -17,7 +17,7 @@ GEM
       oauth
     method_source (1.1.0)
     mini_portile2 (2.8.8)
-    nokogiri (1.18.6)
+    nokogiri (1.18.8)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oauth (1.1.0)
