@@ -4,7 +4,7 @@ PATH
     hatena_fotolife (0.1.5.1)
       hatenablog
       nokogiri
-      oauth
+      oauth (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -48,7 +48,7 @@ GEM
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     version_gem (1.1.6)
-    yard (0.9.37)
+    yard (0.9.42)
 
 PLATFORMS
   ruby
